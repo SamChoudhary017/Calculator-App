@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <link rel="stylesheet" href="Calculator.css"> 
+    <style>
+
+        .calculator {
+            width: 300px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #333;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .display {
+            height: 80px;
+            background-color: cornsilk;
+            color: red;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-radius: 8px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        button {
+            height: 60px;
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            background-color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+            background-color: white;
+        }
+
+        button:active {
+            background-color:white ;
+            transform: scale(0.98);
+        }
+
+        button.operator {
+            background-color: #f57c00;
+            color: #fff;
+        }
+
+        button.operator:hover {
+            background-color: #fb8c00;
+        }
+
+        button.equal {
+            background-color: tan;
+            color: #fff;
+        }
+
+        button.equal:hover {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="App">
+        <div class="calculator">
+            <div class="display" id="display">
+                <div id="inputDisplay">0</div>
+                <div id="resultDisplay"></div>
+            </div>
+            <div class="buttons">
+                <button onclick="handleButtonClick('1')">1</button>
+                <button onclick="handleButtonClick('2')">2</button>
+                <button onclick="handleButtonClick('3')">3</button>
+                <button onclick="handleButtonClick('+')" class="operator">+</button>
+
+                <button onclick="handleButtonClick('4')">4</button>
+                <button onclick="handleButtonClick('5')">5</button>
+                <button onclick="handleButtonClick('6')">6</button>
+                <button onclick="handleButtonClick('-')" class="operator">-</button>
+
+                <button onclick="handleButtonClick('7')">7</button>
+                <button onclick="handleButtonClick('8')">8</button>
+                <button onclick="handleButtonClick('9')">9</button>
+                <button onclick="handleButtonClick('*')" class="operator">*</button>
+
+                <button onclick="handleButtonClick('C')">C</button>
+                <button onclick="handleButtonClick('0')">0</button>
+                <button onclick="handleButtonClick('=')" class="equal">=</button>
+                <button onclick="handleButtonClick('/')" class="operator">/</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let input = "";
+        let result = "";
+
+        function handleButtonClick(value) {
+            if (value === "=") {
+                try {
+                    result = eval(input); 
+                    input = ""; 
+                    updateDisplay();
+                } catch (error) {
+                    result = "Error"; 
+                    input = "";
+                    updateDisplay();
+                }
+            } else if (value === "C") {
+                input = "";
+                result = "";
+                updateDisplay();
+            } else {
+                input += value; 
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('inputDisplay').innerText = input || "0";
+            document.getElementById('resultDisplay').innerText = result;
+        }
+    </script>
+</body>
+</html>
